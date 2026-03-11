@@ -58,8 +58,9 @@ open index.html
 
  ### 🌐 Live Demo 👉 [Live Demo](https://gigachad80.github.io/word-diff)
 
-
-### Or deploy to GitHub Pages in under 2 minutes . See [Deployment](#deployment).
+ Or
+ 
+ ### Deploy to GitHub Pages in under 2 minutes . See [Deployment](#deployment).
 
 
 
