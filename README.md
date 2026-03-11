@@ -12,7 +12,7 @@
 [![Email](https://img.shields.io/badge/Email-pookielinuxuser%40tutamail.com-blue.svg?style=flat&logo=tutanota&logoColor=white)](mailto:pookielinuxuser@tutamail.com)
 
 
-### 🌐 Live Demo 👉 [Live Demo](https://gigachad80.github.io/word-diff)
+### 🌐 Live Demo 👉 [Live Demo]( https://gigachad80.github.io/Word-Diff)
 
 
 </div>
@@ -57,7 +57,7 @@
 open index.html
 ```
 
- 🌐 Live Demo 👉 [Live Demo](https://gigachad80.github.io/word-diff)
+ 🌐 Live Demo 👉 [Live Demo](https://gigachad80.github.io/Word-Diff)
 
  Or
  
