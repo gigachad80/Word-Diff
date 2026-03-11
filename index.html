@@ -1,1 +1,293 @@
-s
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word-Diff — Text & Image Diff</title>
+    <meta name="description"
+        content="Fast, private, offline-capable diff tool. Word, line, char, image comparison with syntax highlighting and shareable URLs.">
+    <meta name="keywords"
+        content="diff tool, text diff, word diff, line diff, image diff, code compare, syntax highlighting, offline diff, browser diff, file compare, javascript diff, python diff, JSON diff, privacy diff tool">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Prism.js core + themes + languages -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-kotlin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+</head>
+
+<body>
+    <div class="w">
+
+        <!-- HEADER -->
+        <header class="hd">
+            <div class="hd-top"><span class="hd-badge">v2</span><span class="hd-sub">100% local · no server · no
+                    tracking</span></div>
+            <h1>Word-Diff</h1>
+            <p class="hd-desc">Word · Line · Char · Image diff with syntax highlighting and shareable URLs</p>
+        </header>
+
+        <!-- TABS -->
+        <div class="tabs" role="tablist">
+            <button class="tab on" id="tabText" onclick="switchTab('text')" role="tab">Text Diff</button>
+            <button class="tab" id="tabImg" onclick="switchTab('img')" role="tab">Image Diff</button>
+        </div>
+
+        <!-- ═══════════ TEXT DIFF SECTION ═══════════ -->
+        <div id="secText">
+
+            <!-- TOOLBAR -->
+            <div class="bar">
+                <div class="bg">
+                    <span class="bl">Mode</span>
+                    <button class="btn on" id="mWord" onclick="setMode('word')">Word</button>
+                    <button class="btn" id="mLine" onclick="setMode('line')">Line</button>
+                    <button class="btn" id="mChar" onclick="setMode('char')">Char</button>
+                </div>
+                <div class="bg">
+                    <span class="bl">View</span>
+                    <button class="btn on" id="vInline" onclick="setView('inline')">Inline</button>
+                    <button class="btn" id="vSbs" onclick="setView('sbs')">Side by Side</button>
+                </div>
+                <div class="bg">
+                    <span class="bl">Lang</span>
+                    <select id="langSel" onchange="onLangChange()">
+                        <option value="none">Plain text</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="typescript">TypeScript</option>
+                        <option value="python">Python</option>
+                        <option value="go">Go</option>
+                        <option value="rust">Rust</option>
+                        <option value="c">C</option>
+                        <option value="cpp">C++</option>
+                        <option value="java">Java</option>
+                        <option value="bash">Bash / Shell</option>
+                        <option value="css">CSS</option>
+                        <option value="markup">HTML / XML</option>
+                        <option value="json">JSON</option>
+                        <option value="yaml">YAML</option>
+                        <option value="sql">SQL</option>
+                        <option value="markdown">Markdown</option>
+                    </select>
+                </div>
+                <div class="bg">
+                    <span class="bl">Format</span>
+                    <button class="btn" onclick="beautifyPanels()" title="Auto-format both panels before comparing">⌥
+                        Beautify</button>
+                </div>
+                <div class="bg">
+                    <label class="ck" title="Ignore whitespace-only differences"><input type="checkbox"
+                            id="ignWs"><span>Ignore
+                            WS</span></label>
+                    <label class="ck" title="Case-insensitive"><input type="checkbox" id="ignCase"><span>Ignore
+                            Case</span></label>
+                    <label class="ck" title="Show only changed lines"><input type="checkbox" id="hideUnch"><span>Changed
+                            Only</span></label>
+                </div>
+                <div class="bg" style="margin-left:auto">
+                    <button class="btn" onclick="swapTexts()">⇄ Swap</button>
+                    <button class="btn" onclick="shareURL()" title="Generate shareable URL with both texts encoded">⤴
+                        Share
+                        URL</button>
+                    <button class="btn" onclick="exportHTML()">↓ Export</button>
+                    <button class="btn" onclick="copyResult()">⎘ Copy</button>
+                    <button class="btn" onclick="clearAll()" style="color:var(--del)">✕ Clear</button>
+                </div>
+            </div>
+
+            <!-- SHARE ROW -->
+            <div class="share-row" id="shareRow" style="display:none">
+                <span class="share-url" id="shareUrlTxt"></span>
+                <button class="btn act" onclick="copyShareURL()" style="flex-shrink:0">Copy Link</button>
+                <button class="btn" onclick="document.getElementById('shareRow').style.display='none'"
+                    style="flex-shrink:0">✕</button>
+            </div>
+
+            <!-- INPUT PANELS -->
+            <div class="panels">
+                <div>
+                    <div class="panel-hd">
+                        <span class="p-title orig">— Original</span>
+                        <span class="p-meta" id="metaA">—</span>
+                    </div>
+                    <textarea id="orig" placeholder="Paste original text or drag & drop a file…" oninput="onInput()"
+                        ondragover="event.preventDefault()" ondrop="handleDrop(event,'orig')"></textarea>
+                    <div class="pf">
+                        <label class="btn" style="cursor:pointer">📂 File
+                            <input type="file" style="display:none" onchange="loadFile(event,'orig')">
+                        </label>
+                        <button class="btn" onclick="importFromURL('orig')"
+                            title="Import from Google Drive, OneDrive, Dropbox, or any public URL">🔗 URL</button>
+                        <button class="btn" onclick="document.getElementById('orig').value='';onInput()">Clear</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="panel-hd">
+                        <span class="p-title mod">+ Modified</span>
+                        <span class="p-meta" id="metaB">—</span>
+                    </div>
+                    <textarea id="mod" placeholder="Paste modified text or drag & drop a file…" oninput="onInput()"
+                        ondragover="event.preventDefault()" ondrop="handleDrop(event,'mod')"></textarea>
+                    <div class="pf">
+                        <label class="btn" style="cursor:pointer">📂 File<input type="file" style="display:none"
+                                onchange="loadFile(event,'mod')"></label>
+                        <button class="btn" onclick="document.getElementById('mod').value='';onInput()">Clear</button>
+                        <button class="btn" onclick="importFromURL('mod')"
+                            title="Import from Google Drive, OneDrive, Dropbox, or any public URL">🔗 URL</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPARE BUTTON -->
+            <div class="ac">
+                <button class="cbtn" onclick="runCompare()">Compare →</button>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats" id="stBox" style="display:none">
+                <div class="st">
+                    <div class="sv" id="stT" style="color:var(--t1)">0</div>
+                    <div class="sl">Total</div>
+                </div>
+                <div class="st">
+                    <div class="sv" id="stS" style="color:var(--add)">0</div>
+                    <div class="sl">Same</div>
+                </div>
+                <div class="st">
+                    <div class="sv" id="stA" style="color:var(--add)">0</div>
+                    <div class="sl">Added</div>
+                </div>
+                <div class="st">
+                    <div class="sv" id="stD" style="color:var(--del)">0</div>
+                    <div class="sl">Removed</div>
+                </div>
+                <div class="st">
+                    <div class="sv" id="stC" style="color:var(--chg)">0</div>
+                    <div class="sl">Changed</div>
+                </div>
+                <div class="sim-w">
+                    <div class="sim-l">Similarity: <strong id="simPct" style="color:var(--acc)">0%</strong></div>
+                    <div class="sim-b">
+                        <div class="sim-f" id="simF" style="width:0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESULT HEADER + NAV -->
+            <div class="rh" id="rh" style="display:none">
+                <span class="rt" id="rtitle">Diff Result</span>
+                <div class="nav">
+                    <button class="nb" id="np" onclick="navDiff(-1)">↑</button>
+                    <span class="np" id="npos">0/0</span>
+                    <button class="nb" id="nn" onclick="navDiff(1)">↓</button>
+                </div>
+            </div>
+
+            <!-- DIFF OUTPUT -->
+            <div class="do" id="diffOut">
+                <div class="empty">Paste text in both panels<br><strong>then click Compare</strong></div>
+            </div>
+
+        </div><!-- /secText -->
+
+        <!-- ═══════════ IMAGE DIFF SECTION ═══════════ -->
+        <div id="secImg" style="display:none">
+
+            <div class="img-panels">
+                <div>
+                    <div class="panel-hd"><span class="p-title orig">— Image A (Original)</span></div>
+                    <div class="img-drop" id="dropA" ondragover="imgOver(event,'A')" ondragleave="imgLeave('A')"
+                        ondrop="imgDrop(event,'A')">
+                        <input type="file" accept="image/*" onchange="imgLoad(event,'A')">
+                        <div class="ph"><strong>+</strong>Click or drag image here<br><span
+                                style="font-size:.72rem">PNG, JPG, WebP,
+                                GIF</span></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="panel-hd"><span class="p-title mod">+ Image B (Modified)</span></div>
+                    <div class="img-drop" id="dropB" ondragover="imgOver(event,'B')" ondragleave="imgLeave('B')"
+                        ondrop="imgDrop(event,'B')">
+                        <input type="file" accept="image/*" onchange="imgLoad(event,'B')">
+                        <div class="ph"><strong>+</strong>Click or drag image here<br><span
+                                style="font-size:.72rem">PNG, JPG, WebP,
+                                GIF</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ac">
+                <button class="cbtn" onclick="runImgDiff()">Compare Images →</button>
+            </div>
+
+            <div id="imgResult" style="display:none">
+                <div class="diff-view-btns">
+                    <button class="btn on" id="ivDiff" onclick="setImgView('diff')">Diff Overlay</button>
+                    <button class="btn" id="ivBlend" onclick="setImgView('blend')">Blend</button>
+                    <button class="btn" id="ivA" onclick="setImgView('a')">Image A</button>
+                    <button class="btn" id="ivB" onclick="setImgView('b')">Image B</button>
+                </div>
+                <div class="img-result">
+                    <canvas id="imgCanvas"></canvas>
+                    <div class="img-stats">
+                        <div class="img-st"><strong id="imgDimA">—</strong>Image A size</div>
+                        <div class="img-st"><strong id="imgDimB">—</strong>Image B size</div>
+                        <div class="img-st"><strong id="imgDiffPx">—</strong>Different pixels</div>
+                        <div class="img-st"><strong id="imgDiffPct">—</strong>% different</div>
+                        <div class="img-st"><strong id="imgSim">—</strong>Similarity</div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /secImg -->
+
+        <!-- TOAST -->
+        <div class="toast" id="toast"></div>
+        <footer class="ft">
+            Word-Diff — 100% client-side · your text and images never leave your browser
+            <br>
+            <span style="display:inline-flex;align-items:center;gap:.35rem;margin-top:.5rem">
+                Made with ❤️ by
+                <a href="https://github.com/gigachad80" target="_blank" rel="noopener"
+                    style="color:var(--acc);text-decoration:none;display:inline-flex;align-items:center;gap:.3rem">
+                    <svg height="14" viewBox="0 0 16 16" fill="var(--acc)" style="vertical-align:middle">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87
+                2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
+                0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21
+                2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04
+                2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82
+                2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
+                0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                    </svg>
+                    gigachad80
+                </a>
+            </span>
+        </footer>
+    </div><!-- /.w -->
+
+    <script src="script.js"></script>
+</body>
+
+</html>
