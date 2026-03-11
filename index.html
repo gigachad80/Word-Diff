@@ -14,8 +14,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <!-- Prism.js core + themes + languages -->
+    <link rel="stylesheet" href="style.css" <!-- Prism.js core + themes + languages -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
@@ -104,11 +103,10 @@
                     <label class="ck" title="Show only changed lines"><input type="checkbox" id="hideUnch"><span>Changed
                             Only</span></label>
                 </div>
-                <div class="bg" style="margin-left:auto">
+                <div class="bg bg-actions" style="margin-left:auto">
                     <button class="btn" onclick="swapTexts()">⇄ Swap</button>
                     <button class="btn" onclick="shareURL()" title="Generate shareable URL with both texts encoded">⤴
-                        Share
-                        URL</button>
+                        Share URL</button>
                     <button class="btn" onclick="exportHTML()">↓ Export</button>
                     <button class="btn" onclick="copyResult()">⎘ Copy</button>
                     <button class="btn" onclick="clearAll()" style="color:var(--del)">✕ Clear</button>
