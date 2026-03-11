@@ -3,7 +3,18 @@
 
 
 #### **Text and image diff that runs entirely in your browser.**  No server. No account. No upload. One HTML file.
+<div align="center">
 
+![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-purple.svg)
+![Platform](https://img.shields.io/badge/Platform-Browser%20%7C%20Offline-gray.svg)
+![Development Time](https://img.shields.io/badge/Development%20Time-Approx%201%20hr%2020%20min-pink.svg)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/gigachad80/word-diff/issues)
+
+### 🌐 Live Demo 👉 [Live Demo](https://gigachad80.github.io/word-diff)
+
+📧 **Contact:** pookielinuxuser@tutamail.com
+
+</div>
 
 ## Table of Contents
 
@@ -45,7 +56,10 @@
 open index.html
 ```
 
-Or deploy to GitHub Pages in under 2 minutes . See [Deployment](#deployment).
+ ### 🌐 Live Demo 👉 [Live Demo](https://gigachad80.github.io/word-diff)
+
+
+### Or deploy to GitHub Pages in under 2 minutes . See [Deployment](#deployment).
 
 
 
