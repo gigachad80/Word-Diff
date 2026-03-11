@@ -8,11 +8,12 @@
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-purple.svg)
 ![Platform](https://img.shields.io/badge/Platform-Browser%20%7C%20Offline-gray.svg)
 ![Development Time](https://img.shields.io/badge/Development%20Time-Approx%201%20hr%2020%20min-pink.svg)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/gigachad80/word-diff/issues)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/gigachad80/Word-Diff/issues)
+[![Email](https://img.shields.io/badge/Email-pookielinuxuser%40tutamail.com-blue.svg?style=flat&logo=tutanota&logoColor=white)](mailto:pookielinuxuser@tutamail.com)
+
 
 ### 🌐 Live Demo 👉 [Live Demo](https://gigachad80.github.io/word-diff)
 
-📧 **Contact:** pookielinuxuser@tutamail.com
 
 </div>
 
@@ -56,11 +57,11 @@
 open index.html
 ```
 
- ### 🌐 Live Demo 👉 [Live Demo](https://gigachad80.github.io/word-diff)
+ 🌐 Live Demo 👉 [Live Demo](https://gigachad80.github.io/word-diff)
 
  Or
  
- ### Deploy to GitHub Pages in under 2 minutes . See [Deployment](#deployment).
+ Deploy to GitHub Pages in under 2 minutes . See [Deployment](#deployment).
 
 
 
