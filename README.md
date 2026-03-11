@@ -2,7 +2,7 @@
 #  Word-Diff
 
 
-#### **Text and image diff that runs entirely in your browser.**  No server. No account. No upload. One HTML file.
+#### Private **Text and image diff that runs entirely in your browser.**  No server. No account. No upload. One HTML file.
 <div align="center">
 
 ![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-purple.svg)
